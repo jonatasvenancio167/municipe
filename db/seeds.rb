@@ -1,0 +1,1 @@
+Municipe.find_or_create_by(full_name: "Teste 2", birth_date: Date.current, cpf: "02636224017", cns: "123456", email: "teste@email.com", status: true, telephone: "5585997867654")

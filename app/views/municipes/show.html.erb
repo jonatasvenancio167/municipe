@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= I18n.t('municipe.full_name') %></strong>
+  <%= @municipe.full_name %>
+</p>
+
+<p>
+  <strong>Cpf:</strong>
+  <%= @municipe.cpf %>
+</p>
+
+<p>
+  <strong>Cns:</strong>
+  <%= @municipe.cns %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @municipe.email %>
+</p>
+
+<p>
+  <strong><%= I18n.t('municipe.birth_date') %></strong>
+  <%= @municipe.birth_date %>
+</p>
+
+<p>
+  <strong><%= I18n.t('municipe.telephone') %></strong>
+  <%= @municipe.telephone %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= I18n.t("municipe.#{@municipe.status}") %>
+</p>
+
+<%= link_to I18n.t('edit'), edit_municipe_path(@municipe) %> |
+<%= link_to I18n.t('back'), municipes_path %>

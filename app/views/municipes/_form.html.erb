@@ -1,0 +1,63 @@
+<%= form_for @municipe do |form| %>
+  <%= render 'component/simples_form_errors', object: form.object %>
+
+  <div class="row">
+    <div class="col-3">
+      <div class="field">
+        <%= form.label I18n.t('municipe.full_name') %>
+        <%= form.text_field :full_name, class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="field">
+        <%= form.label :cpf %>
+        <%= form.text_field :cpf, id: 'cpf', class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="field">
+        <%= form.label I18n.t("municipe.cns_national_health_council") %>
+        <%= form.text_field :cns, class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="field">
+        <%= form.label :email %>
+        <%= form.text_field :email, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4">
+      <div class="field">
+        <%= form.label I18n.t('municipe.birth_date') %>
+        <%= form.date_select :birth_date, {}, class: "datepicker" %>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="field">
+        <%= form.label I18n.t('municipe.telephone') %>
+        <%= form.text_field :telephone, class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-check form-switch mt-4">
+        <%= form.label :status, class: "form-check-label" %>
+        <%= form.check_box :status, { class: "form-check-input"}, "true", "false" %>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <fieldset>
+    <%= form.fields_for :addresses do |f| %>
+      <%= render 'form_address', form: f %>
+    <% end %>
+  </fieldset>
+
+  <br>
+
+  <%= render 'component/form_action', form: form %>
+<% end %>

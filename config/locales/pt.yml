@@ -1,0 +1,82 @@
+pt-BR:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'A validação falhou: %{errors}'
+  show: "Visualizar"
+  edit: "Editar"
+  back: "Voltar"
+  action: "Ação"
+  date:
+    abbr_day_names:
+    - Dom
+    - Seg
+    - Ter
+    - Qua
+    - Qui
+    - Sex
+    - Sáb
+    abbr_month_names:
+    -
+    - Jan
+    - Fev
+    - Mar
+    - Abr
+    - Mai
+    - Jun
+    - Jul
+    - Ago
+    - Set
+    - Out
+    - Nov
+    - Dez
+    day_names:
+    - Domingo
+    - Segunda-feira
+    - Terça-feira
+    - Quarta-feira
+    - Quinta-feira
+    - Sexta-feira
+    - Sábado
+    formats:
+      default: "%d/%m/%Y"
+      long: "%d de %B de %Y"
+      short: "%d de %B"
+      shorter: "%d/%m"
+    month_names:
+    -
+    - Janeiro
+    - Fevereiro
+    - Março
+    - Abril
+    - Maio
+    - Junho
+    - Julho
+    - Agosto
+    - Setembro
+    - Outubro
+    - Novembro
+    - Dezembro
+    order:
+    - :day
+    - :month
+    - :year
+  municipe:
+    birth_date: "Data de nascimento"
+    full_name: "Nome completo"
+    telephone: "Telefone"
+    new_municipe: "Novo Municipio"
+    editing_municipe: "Editar Municipio"
+    true: "ativo"
+    false: "inativo"
+    municipe_was_successfully_created: "Municipio criado com sucesso"
+    cns_national_health_council: "CNS (Conselho Nacional de Saúde)"
+  address:
+    complement: "Complemento"
+    city: "Cidade"
+    ibge_code: "Código IBGE"
+    public_place: "Logradouro"
+    neighborhood: "Bairro"
+  cpf_is_not_invalid: "Esse CPF não é valido"
+  cns_is_not_invalid: "Esse CNS não é valido"
+  cns_incomplete: "CNS está incompleto"
