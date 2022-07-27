@@ -1,9 +1,8 @@
 class Address < ApplicationRecord
 
-  # belongs_to :municipes
+  belongs_to :municipe
 
-  validates :city, :public_place, :neighborhood, :uf, presence: true
-  validates :cep, length: { is: 8 }
+  validates :city, :public_place, :neighborhood, :uf, :cep, presence: true
 
   UFS = [
     'AC',
