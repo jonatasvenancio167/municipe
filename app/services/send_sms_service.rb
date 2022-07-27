@@ -9,7 +9,7 @@ class SendSmsService
     client = Twilio::REST::Client.new
     client.messages.create(
       from: Rails.application.credentials.twilio_phone_number,
-      to: '+5585987786793',
+      to: ENV['TELEPHONE_NUMBER'],
       body: "#{user.full_name} a sua conta foi #{status} com sucesso!",
     )
   end
