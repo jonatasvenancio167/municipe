@@ -1,20 +1,28 @@
 class Municipe < ApplicationRecord
-  include Basic
-    
-  belongs_to :address
+  max_pages 25
 
 	validates :birth_date, :cns, :email, :cpf, :full_name, :telephone, presence: true
   validate :cpf_valid?
-  validate :is_email_valid?
-  # validate :cns_valid?
+  validate :is_email_valid?, :validate_age
+  validate :cns_valid?
+
+  has_one :address, :dependent => :destroy
+  has_one_attached :image
 
   validates_associated :address
   accepts_nested_attributes_for :address
 
-  mount_uploader :municipe, MunicipeUploader
+  scope :filter_by_cpf, -> (cpf) { where('cpf like :search', search: cpf) }
+
+  def validate_age
+    if birth_date.present? && birth_date.strftime('%Y') > 18.years.ago.strftime('%Y')
+      return I18n.t('activerecord.errors.messages.birth_date_invalid')
+    end
+  end
 
   def cpf_valid?
     invalid_cpf_values = CPF_INVALID_DIGITS
+
     cpf_digit = self.cpf.scan /[0-9]/
 
     if cpf_digit.length == 11
@@ -43,21 +51,23 @@ class Municipe < ApplicationRecord
 
   def cns_valid?
 
-    cns = self.cns.gsub!(/\s+/, '')
+    if cns.present?
+      cns = self.cns.gsub!(/\s+/, '')
 
-    return cns_incomplete if cns.length != 15 && !cns.blank?
-    return message_error_cns unless cns.match?(/\A\d+\Z/)
+      return cns_incomplete if cns.length != 15
+      return message_error_cns unless cns.match?(/\A\d+\Z/)
 
-    case cns.chars.first
-      when '1', '2'
-        cns_validation_return = valid_cns(cns)
-      when '7', '8', '9'
-        cns_validation_return = validate_provisional_cns(cns) 
-      else
-        return message_error_cns
+      case cns.chars.first
+        when '1', '2'
+          cns_validation_return = valid_cns(cns)
+        when '7', '8', '9'
+          cns_validation_return = validate_provisional_cns(cns)
+        else
+          return message_error_cns
+      end
+
+      return message_error_cns if cns_validation_return == false
     end
-
-    return message_error_cns if cns_validation_return == false
   end
 
   def is_email_valid?
@@ -67,17 +77,17 @@ class Municipe < ApplicationRecord
   private
 
   CPF_INVALID_DIGITS = %w{
-    12345678909 
-    11111111111 
-    22222222222 
-    33333333333 
-    44444444444 
-    55555555555 
-    66666666666 
-    77777777777 
-    88888888888 
-    99999999999 
-    00000000000 
+    12345678909
+    11111111111
+    22222222222
+    33333333333
+    44444444444
+    55555555555
+    66666666666
+    77777777777
+    88888888888
+    99999999999
+    00000000000
     12345678909
   }
 
@@ -86,7 +96,7 @@ class Municipe < ApplicationRecord
 
   def valid_cns(cns)
     pis = cns[0..11]
-    
+
     sum = pis.chars.each_with_index.inject(0) do |result, (char, i)|
       result += char.to_i * (15 - i)
       result
@@ -94,7 +104,7 @@ class Municipe < ApplicationRecord
 
     dv = 11 - (sum % 11)
     dv = dv == 11 ? 0 : dv
-    cns_generated = 
+    cns_generated =
       if dv == 10
         sum += 2
         dv = 11 - (sum % 11)
@@ -125,6 +135,6 @@ class Municipe < ApplicationRecord
   end
 
   def message_error_cpf
-    errors.add(:cpf, message: I18n.t("cpf_is_not_invalid")) 
+    errors.add(:cpf, message: I18n.t("cpf_is_not_invalid"))
   end
 end
