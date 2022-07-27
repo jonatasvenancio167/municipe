@@ -10,17 +10,20 @@ class MunicipesController < ApplicationController
 
   def new
     @municipe = Municipe.new
+    @municipe.build_address
   end
 
   def create
-    @municipe = Municipe.new(object_params)
+    @municipe = Municipe.new(municipe_params)
 
     respond_to do |format|
       if @municipe.save
-        format.html { redirect_to object_url(@municipe), notice: I18n.t("municipe.municipe_was_successfully_created") }
-        format.json { render :show, status: :created, location: @municipe }
 
-        respond_with @municipe, location: { action: 'index' }
+        MunicipeMailer.with(user: @municipe).welcome_email.deliver_now!
+        SendSms.new(@municipe).call
+
+        format.html { redirect_to municipe_url(@municipe), notice: t('notice.registration_created_successfully') }
+        format.json { render :show, status: :created, location: @municipe }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @municipe.errors, status: :unprocessable_entity }
