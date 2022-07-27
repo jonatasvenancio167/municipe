@@ -1,38 +1,46 @@
-<p id="notice"><%= notice %></p>
+<p id="alert alert-success text-success"><%= notice %></p>
 
-<h1>Municipes</h1>
+<%= render 'search' %>
 
-<%= search_form_for @filter do |f| %>
-    <%= f.label I18n.t('municipe.full_name') %>
-    <%= f.search_field :full_name, class: "col-3" %>
-    <%= f.submit %>
-<% end %>
+<br>
+
+<h1><%= t('activerecord.municipe') %></h1>
+
+<hr>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= I18n.t('municipe.full_name') %></th>
-      <th>Cpf</th>
-      <th>Cns</th>
-      <th>Email</th>
-      <th><%= I18n.t('municipe.birth_date') %></th>
-      <th><%= I18n.t('municipe.birth_date') %></th>
+      <th><%= t('municipe.full_name') %></th>
+      <th><%= t('municipe.cpf') %></th>
+      <th><%= t('municipe.cns') %></th>
+      <th><%= t('municipe.email') %></th>
+      <th><%= t('municipe.birth_date') %></th>
+      <th><%= t('municipe.telephone') %></th>
       <th>Status</th>
-      <th><%= I18n.t('action') %></th>
+      <th><%= t('action') %></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @object.each do |municipe| %>
+    <% @municipe.each do |municipe| %>
       <tr>
         <td><%= municipe.full_name %></td>
-        <td><%= municipe.cpf %></td>
-        <td><%= municipe.cns %></td>
+        <td class='cpf'><%= municipe.cpf %></td>
+        <td class='cns'><%= municipe.cns %></td>
         <td><%= municipe.email %></td>
-        <td><%= municipe.birth_date %></td>
-        <td><%= municipe.telephone %></td>
-        <td><%= I18n.t("municipe.#{municipe.status}") %></td>
-        <td><%= link_to I18n.t('show'), municipe, class: 'btn btn-outline-success btn-sm' %> | <%= link_to I18n.t('edit'), edit_municipe_path(municipe), class: 'btn btn-outline-danger btn-sm' %></td>
+        <td><%= municipe.birth_date.strftime('%d/%m/%Y') %></td>
+        <td class='tel'><%= municipe.telephone %></td>
+        <td><%= t(municipe.status, scope: 'municipe.status') %></td>
+        <td>
+          <%= link_to municipe,  class: 'text-success size-icon' do %>
+            <i class="fa-regular fa-eye"></i>
+          <% end %>
+
+          <%= link_to edit_municipe_path(municipe), class: 'text-info size-icon' do %>
+            <i class="fa-regular fa-pen-to-square"></i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -40,4 +48,4 @@
 
 <br>
 
-<%= link_to I18n.t('municipe.new_municipe'), new_municipe_path, class: 'btn btn-primary btn-dark' %>
+<%= link_to t('municipe.new_municipe'), new_municipe_path, class: 'btn btn-dark mb-3' %>
