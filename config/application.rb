@@ -29,8 +29,8 @@ module App
       address:              'smtp.gmail.com',
       domain:               'smpt.gmail.com',
       port:                 587,
-      user_name:            'jvenancio649@gmail.com',
-      password:             'sxjxincqlkszpzol',
+      user_name:            ENV['USER_NAME_EMAIL'],
+      password:             ENV['PASSWORD_EMAIL'],
       authentication:       'plain',
       enable_starttls_auto: true,
     }

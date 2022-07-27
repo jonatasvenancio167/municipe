@@ -7,9 +7,11 @@ default: &default
 
 development:
   <<: *default
-  database: sgm_development
+  user: ENV['DB_USERNAME']
+  password: ENV['DB_PASSWORD']
+  database: ENV['DB_DATABASE']
 
 
 test:
   <<: *default
-  database: sgm_test
+  database: ENV['NAME_DATABASE_TEST']
