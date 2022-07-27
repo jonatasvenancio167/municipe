@@ -1,59 +1,54 @@
-<%= form_for @municipe do |form| %>
+<%= simple_form_for @municipe do |form| %>
   <%= render 'component/simples_form_errors', object: form.object %>
+
+  <hr>
 
   <div class="row">
     <div class="col-3">
-      <div class="field">
-        <%= form.label I18n.t('municipe.full_name') %>
-        <%= form.text_field :full_name, class: "form-control" %>
-      </div>
+      <%= form.label I18n.t('municipe.full_name'), class: 'text-secondary m-1' %>
+      <%= form.text_field :full_name, class: "form-control" %>
     </div>
     <div class="col-3">
-      <div class="field">
-        <%= form.label :cpf %>
-        <%= form.text_field :cpf, id: 'cpf', class: "form-control" %>
-      </div>
+      <%= form.label :cpf, class: 'text-secondary m-1' %>
+      <%= form.text_field :cpf, id: 'cpf', class: "form-control cpf" %>
     </div>
     <div class="col-3">
-      <div class="field">
-        <%= form.label I18n.t("municipe.cns_national_health_council") %>
-        <%= form.text_field :cns, class: "form-control" %>
-      </div>
+      <%= form.label I18n.t("municipe.cns"), class: 'text-secondary m-1' %>
+      <%= form.text_field :cns, class: "form-control cns", required: true %>
     </div>
     <div class="col-3">
-      <div class="field">
-        <%= form.label :email %>
-        <%= form.text_field :email, class: "form-control" %>
-      </div>
+      <%= form.label :email, class: 'text-secondary m-1' %>
+      <%= form.text_field :email, class: "form-control" %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-4">
-      <div class="field">
-        <%= form.label I18n.t('municipe.birth_date') %>
-        <%= form.date_select :birth_date, {}, class: "datepicker" %>
+    <div class="col-3 mb-3">
+        <label class="text-secondary m-1"><%= t('municipe.birth_date') %></label>
+        <div class="input-group w-100">
+          <%= form.input :birth_date, as: :date, html5: true, label: false %>
+        </div>
       </div>
-    </div>
     <div class="col-4">
-      <div class="field">
-        <%= form.label I18n.t('municipe.telephone') %>
-        <%= form.text_field :telephone, class: "form-control" %>
-      </div>
+      <%= form.label I18n.t('municipe.telephone'), class: 'text-secondary m-1' %>
+      <%= form.text_field :telephone, class: "form-control tel" %>
     </div>
     <div class="col-4">
       <div class="form-check form-switch mt-4">
-        <%= form.label :status, class: "form-check-label" %>
+        <%= form.label :status, class: "form-check-label text-secondary" %>
         <%= form.check_box :status, { class: "form-check-input"}, "true", "false" %>
       </div>
     </div>
+  </div>
+  <div class='w-25 file-input'>
+      <%= form.input :image,  as: :file, label: false %>
   </div>
 
   <hr />
 
   <fieldset>
-    <%= form.fields_for :addresses do |f| %>
-      <%= render 'form_address', form: f %>
+    <%= form.fields_for :address do |f| %>
+      <%= render 'form_address', f: f %>
     <% end %>
   </fieldset>
 
