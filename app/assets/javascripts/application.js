@@ -16,3 +16,11 @@
 //= require_tree .
 //= require jquery
 //= require jquery_ujs
+
+$(document).ready(function()
+{
+  $('.tel').mask('(00) 0 0000-0000')
+  $('.cpf').mask('000.000.000-00')
+  $('.cns').mask('000 0000 0000 0000')
+  $('.cep').mask('000000-000')
+})
