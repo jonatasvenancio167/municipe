@@ -1,39 +1,112 @@
-<p id="notice"><%= notice %></p>
+<p class="text-success mt-2"><%= notice %></p>
 
-<p>
-  <strong><%= I18n.t('municipe.full_name') %></strong>
-  <%= @municipe.full_name %>
-</p>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='card'>
+      <div class='card-header'>
+        <h4 class="card-title">
+            <%= t('activerecord.municipe') %>
+        </h4>
+      </div>
+      <div class='card-body'>
+        <div class='row'>
+          <div class='col-5 form-group'>
+              <strong><%= I18n.t('municipe.full_name') %></strong>
+              <input value='<%= @municipe.full_name %>', class='form-control', disabled />
+          </div>
+          <div class='col-3'>
+            <strong>Cpf:</strong>
+            <input value='<%= @municipe.cpf %>', class='form-control cpf', disabled />
+          </div>
+          <div class='col-4'>
+            <strong>Cns:</strong>
+            <input value='<%= @municipe.cns %>', class='form-control cns', disabled />
+          </div>
+        </div>
+        <div class='row mt-3'>
+          <div class='col-3'>
+            <strong>Email:</strong>
+            <input value='<%= @municipe.email %>', class='form-control', disabled />
+          </div>
+          <div class='col-3'>
+            <strong><%= I18n.t('municipe.birth_date') %></strong>
+            <input value='<%= @municipe.birth_date.strftime('%d/%m/%Y') %>', class='form-control', disabled />
+          </div>
+          <div class='col-3'>
+            <strong><%= I18n.t('municipe.telephone') %></strong>
+            <input value='<%= @municipe.telephone %>', class='form-control tel', disabled />
+          </div>
+          <div class='col-3'>
+            <strong>Status:</strong>
+            <input value='<%= t(@municipe.status, scope: "municipe.status") %>', class='form-control', disabled />
+          </div>
+        </div>
+        <div class='mt-3'>
+          <div class='col-6'>
+            <% if @municipe.image.attached? %>
+              <%= image_tag @municipe.image, width: 200, heigth: 200 %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Cpf:</strong>
-  <%= @municipe.cpf %>
-</p>
+<br>
 
-<p>
-  <strong>Cns:</strong>
-  <%= @municipe.cns %>
-</p>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='card'>
+      <div class='card-header'>
+        <h4 class="card-title">
+          <%= t('activerecord.address') %>
+        </h4>
+      </div>
+      <div class='card-body'>
+        <div class='row'>
+          <div class='col-4'>
+              <strong><%= I18n.t('address.cep') %></strong>
+              <input value='<%= @municipe.address.cep %>', class='form-control cep', disabled />
+          </div>
+          <div class='col-4'>
+            <strong><%= I18n.t('address.neighborhood') %></strong>
+            <input value='<%= @municipe.address.neighborhood %>', class='form-control', disabled />
+          </div>
+          <div class='col-4'>
+            <strong><%= I18n.t('address.public_place') %></strong>
+            <input value='<%= @municipe.address.public_place %>', class='form-control', disabled />
+          </div>
+        </div>
+        <div class='row mt-3'>
+          <div class='col-3'>
+            <strong><%= I18n.t('address.complement') %></strong>
+            <input value='<%= @municipe.address.complement %>', class='form-control', disabled />
+          </div>
+          <div class='col-3'>
+            <strong><%= I18n.t('address.city') %></strong>
+            <input value='<%= @municipe.address.city %>', class='form-control', disabled />
+          </div>
+          <div class='col-3'>
+            <strong><%= I18n.t('address.uf') %></strong>
+            <input value='<%= @municipe.address.uf %>', class='form-control', disabled />
+          </div>
+          <div class='col-3'>
+            <strong><%= I18n.t('address.ibge_code') %></strong>
+            <input value='<%= @municipe.address.ibge_code %>', class='form-control', disabled />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @municipe.email %>
-</p>
+<div class='mb-3 d-flex justify-content-between'>
+  <%= link_to municipes_path, class: 'text-dark size-icon' do %>
+    <i class="fa-solid fa-arrow-left"></i>
+  <% end %>
 
-<p>
-  <strong><%= I18n.t('municipe.birth_date') %></strong>
-  <%= @municipe.birth_date %>
-</p>
-
-<p>
-  <strong><%= I18n.t('municipe.telephone') %></strong>
-  <%= @municipe.telephone %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= I18n.t("municipe.#{@municipe.status}") %>
-</p>
-
-<%= link_to I18n.t('edit'), edit_municipe_path(@municipe) %> |
-<%= link_to I18n.t('back'), municipes_path %>
+  <%= link_to edit_municipe_path(@municipe), class:'text-success size-icon' do %>
+    <i class="fa-regular fa-pen-to-square"></i>
+  <% end %>
+</div>
