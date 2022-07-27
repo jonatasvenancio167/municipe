@@ -1,0 +1,11 @@
+<%= simple_form_for :search_municipe, method: "GET",  id: 'search_municipes', html: { data: {turbo: false}} do |f| %>
+  <div class='row'>
+    <div class='col-3'>
+      <%= f.label :cpf %>
+      <%= f.text_field :cpf, class: 'form-control mb-2', label: false %>
+    </div>
+    <div class='col-3 mt-4'>
+      <%= f.submit t('search'), class: 'btn btn-outline-dark' %>
+    </div>
+  </div>
+<% end %>
