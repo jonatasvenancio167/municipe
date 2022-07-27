@@ -31,22 +31,45 @@ class MunicipesController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def show
+  end
+
   def update
-    puts "address --->#{params[:city]}"
-    if @municipe.update(object_params)
+    respond_to do |format|
+      if @municipe.update(municipe_params)
 
-      # @object.image.attach(params[@object.class.name.underscore][:image]) if object_params.has_key?(:image)
-      # @object.bw_image.attach(params[@object.class.name.underscore][:bw_image]) if object_params.has_key?(:bw_image)
+        MunicipeMailer.with(user: @municipe).welcome_email.deliver_now!
+        SendSms.new(@municipe).call
 
-      respond_to @municipe, location: { action: 'index' }
-    else
-      respond_with @municipe
+        format.html { redirect_to municipe_url(@municipe), notice: t('notice.registration_updated_successfully') }
+        format.json { render :show, status: :ok, location: @municipe }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @municipe.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   private
-  
-  def object_params
-    params.require(:municipe).permit(:full_name, :cpf, :cns, :email, :birth_date, :telephone, :status, :address_id, { addresses_attributes: [:cep, :public_place, :complement, :neighborhood, :city, :uf, :ibge_code] })
+
+  def paginate
+    @municipe = Municipe.limit(5)
+    @municipe.page(1).per(20).size
+    @municipe.page(1).per(20).total_count
+  end
+
+  def set_municipe
+    @municipe = Municipe.find(params[:id])
+  end
+
+  def municipe_params
+    params.require(:municipe).permit(
+      :full_name, :cpf, :cns, :email, :birth_date, :telephone, :image,
+      :status, { address_attributes: [:cep, :public_place, :complement, :neighborhood, :city, :uf,
+      :ibge_code] }
+    )
   end
 end
