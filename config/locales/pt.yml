@@ -1,12 +1,17 @@
 pt-BR:
   activerecord:
+    municipe: Cidadão
+    address: Endereço
     errors:
       messages:
-        record_invalid: 'A validação falhou: %{errors}'
-  show: "Visualizar"
-  edit: "Editar"
-  back: "Voltar"
-  action: "Ação"
+        blank: O campo não pode ficar em branco
+        invalid: Esse campo é invalido
+        birth_date_invalid: Você deve ter mais de 18 anos
+  show: Visualizar
+  edit: Editar
+  back: Voltar
+  action: Ação
+  create: Criar
   date:
     abbr_day_names:
     - Dom
@@ -61,22 +66,10 @@ pt-BR:
     - :day
     - :month
     - :year
-  municipe:
-    birth_date: "Data de nascimento"
-    full_name: "Nome completo"
-    telephone: "Telefone"
-    new_municipe: "Novo Municipio"
-    editing_municipe: "Editar Municipio"
-    true: "ativo"
-    false: "inativo"
-    municipe_was_successfully_created: "Municipio criado com sucesso"
-    cns_national_health_council: "CNS (Conselho Nacional de Saúde)"
-  address:
-    complement: "Complemento"
-    city: "Cidade"
-    ibge_code: "Código IBGE"
-    public_place: "Logradouro"
-    neighborhood: "Bairro"
-  cpf_is_not_invalid: "Esse CPF não é valido"
-  cns_is_not_invalid: "Esse CNS não é valido"
-  cns_incomplete: "CNS está incompleto"
+  errors:
+    template:
+        body: 'Por favor, verifique o(s) seguinte(s) campo(s):'
+  cpf_is_not_invalid: Esse CPF não é valido
+  cns_is_not_invalid: Esse CNS não é valido
+  cns_incomplete: CNS está incompleto
+  search: Buscar
