@@ -1,9 +1,9 @@
 <div class="row">
-  <div class="col-md-1">
+  <div class="col-1">
     <%= link_to I18n.t('back'), url_for(controller: controller_name, action: 'index'), class: "btn btn-dark btn-primary" %>
   </div>
 
-  <div class="col-md-1">
-    <%= (local_assigns[:form] || form).button :submit, class: "btn btn-primary btn-dark pull-right" %>
+  <div class="col-1">
+    <%= (local_assigns[:form] || form).button :submit, t('create'), class: "btn btn-primary btn-dark" %>
   </div>
 </div>
