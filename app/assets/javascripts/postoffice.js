@@ -8,7 +8,7 @@ $(document).ready(function() {
     $("#uf").val("");
     $("#ibge_code").val("");
   }
-  
+
   $("#cep").blur(function() {
     var cep = $(this).val().replace(/\D/g, '');
     if (cep != "") {
@@ -24,6 +24,7 @@ $(document).ready(function() {
             $("#public_place").val(data.logradouro);
             $("#neighborhood").val(data.bairro);
             $("#city").val(data.localidade);
+            $("#uf").val(data.uf);
             $("#municipe_addresses_uf").val(data.uf);
             $("#ibge_code").val(data.ibge);
           }
