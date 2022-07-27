@@ -8,6 +8,11 @@
   </head>
 
   <body>
-    <%= yield %>
+    <h1>Olá <%= @user.full_name %></h1>
+    <p>
+      You have successfully signed up to example.com,
+      your username is: <%= @user.full_name %>
+    </p>
+    <p>Thanks for joining and have a great day!</p>
   </body>
 </html>
