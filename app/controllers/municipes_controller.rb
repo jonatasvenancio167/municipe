@@ -1,8 +1,11 @@
 class MunicipesController < ApplicationController
+  before_action :set_municipe, only: %i[ show edit update ]
 
   def index
-    @filter = Municipe.joins(:address).ransack(params[:q])
-    @object = @filter.result(distinct: true)
+    @municipe = Municipe.all
+    @municipe = @municipe.filter_by_cpf(params[:search_municipe][:cpf]) if params[:search_municipe]
+
+    paginate
   end
 
   def new
