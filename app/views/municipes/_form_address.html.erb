@@ -1,33 +1,33 @@
 <div class="row">
   <div class="col-4">
-    <%= form.label :cep %>
-    <%= form.text_field :cep, id: 'cep', class: 'form-control' %>
+    <%= f.label :cep, class: 'text-secondary m-1' %>
+    <%= f.text_field :cep, id: 'cep', class: 'form-control cep' %>
   </div>
   <div class="col-4">
-    <%= form.label I18n.t('address.public_place') %>
-    <%= form.text_field :public_place, id: 'public_place', class: 'form-control' %>
+    <%= f.label I18n.t('address.public_place'), class: 'text-secondary m-1' %>
+    <%= f.text_field :public_place, id: 'public_place', class: 'form-control' %>
   </div>
   <div class="col-4">
-    <%= form.label I18n.t('address.complement') %>
-    <%= form.text_field :complement, class: 'form-control' %>
+    <%= f.label I18n.t('address.complement'), class: 'text-secondary m-1' %>
+    <%= f.text_field :complement, class: 'form-control' %>
   </div>
 </div>
 
 <div class="row">
   <div class="col-3">
-    <%= form.label I18n.t('address.neighborhood') %>
-    <%= form.text_field :neighborhood, id: 'neighborhood', class: 'form-control' %>
+    <%= f.label I18n.t('address.neighborhood'), class: 'text-secondary m-1' %>
+    <%= f.text_field :neighborhood, id: 'neighborhood', class: 'form-control' %>
   </div>
   <div class="col-3">
-    <%= form.label I18n.t('address.city') %>
-    <%= form.text_field :city, id: 'city', class: 'form-control' %>
+    <%= f.label I18n.t('address.city'), class: 'text-secondary m-1' %>
+    <%= f.text_field :city, id: 'city', class: 'form-control' %>
   </div>
   <div class="col-3">
-    <%= form.label :uf %>
-    <%= form.select :uf, options_for_select(Address::UFS.map {|uf| uf}), {include_blank: true}, class: 'form-control form-control-multiple' %>
+    <%= f.label :uf, class: 'text-secondary m-1' %>
+    <%= f.select :uf, options_for_select(Address::UFS.map {|uf| uf}), {include_blank: true}, class: 'form-control form-control-multiple' %>
   </div>
   <div class="col-3">
-    <%= form.label I18n.t('address.ibge_code') %>
-    <%= form.text_field :ibge_code, id: 'ibge_code' , class: 'form-control' %>
+    <%= f.label I18n.t('address.ibge_code'), class: 'text-secondary m-1' %>
+    <%= f.text_field :ibge_code, id: 'ibge_code' , class: 'form-control' %>
   </div>
 </div>
